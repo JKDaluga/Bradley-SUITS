@@ -12,7 +12,7 @@ public class PinScript : MonoBehaviour
         this.transform.position = Camera.main.transform.position + gazeDirection.normalized * 11;
 
 
-        AudioLibrary.AlertSound();
+        //AudioLibrary.AlertSound();
         
 
         // Rotate this object's parent object to face the user.
