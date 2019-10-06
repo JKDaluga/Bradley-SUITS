@@ -17,6 +17,38 @@
             </e>
           </e>
         </e>
+        <e p="HoloToolkit-Gaze-210" t="Include">
+          <e p="Input" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="CursorManager.cs" t="Include" />
+              <e p="GazeManager.cs" t="Include" />
+              <e p="GazeStabilizer.cs" t="Include" />
+              <e p="GestureManager.cs" t="Include" />
+            </e>
+          </e>
+          <e p="NewBehaviourScript.cs" t="Include" />
+          <e p="Utilities" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Billboard.cs" t="Include" />
+              <e p="DirectionIndicator.cs" t="Include" />
+              <e p="Interpolator.cs" t="Include" />
+              <e p="SimpleTagalong.cs" t="Include" />
+              <e p="Singleton.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="LambertianConfigurable.cginc" t="Include" />
+              <e p="LambertianConfigurable.shader" t="Include" />
+              <e p="LambertianConfigurableTransparent.shader" t="Include" />
+              <e p="StandardFast.shader" t="Include" />
+              <e p="UnlitConfigurable.cginc" t="Include" />
+              <e p="UnlitConfigurable.shader" t="Include" />
+              <e p="UnlitConfigurableTransparent.shader" t="Include" />
+              <e p="VertexLitConfigurable.cginc" t="Include" />
+              <e p="VertexLitConfigurable.shader" t="Include" />
+              <e p="VertexLitConfigurableTransparent.shader" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Resources" t="Include">
           <e p="Shaders" t="Include">
             <e p="SpecularHighlight.shader" t="Include" />
@@ -34,7 +66,8 @@
             <e p="VitalsText.cs" t="Include" />
           </e>
           <e p="AnimationManager.cs" t="Include" />
-          <e p="GestureManager.cs" t="Include" />
+          <e p="AudioLibrary.cs" t="Include" />
+          <e p="AudioManager.cs" t="Include" />
           <e p="Gestures" t="Include">
             <e p="Onclick.cs" t="Include" />
           </e>
