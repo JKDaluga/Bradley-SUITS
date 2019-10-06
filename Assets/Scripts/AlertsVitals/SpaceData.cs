@@ -15,7 +15,6 @@ public class SpaceData
     public float p_sub;
     public float t_sub;
     public float v_fan;
-    //public string extraVehicularActivityTime;
     public float p_o2;
     public float rate_o2;
     public float cap_battery;
