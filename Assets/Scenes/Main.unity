@@ -740,6 +740,104 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 290900557}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1290148448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1689301997149756, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.5019698
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961944034214910, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114898972664985910, guid: 8f5d73e9a9c900e47b136946d65abe18,
+        type: 3}
+      propertyPath: voice
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114403528520852582, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 8f5d73e9a9c900e47b136946d65abe18, type: 3}
+--- !u!1 &1290148449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1689301997149756, guid: 8f5d73e9a9c900e47b136946d65abe18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1290148448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1290148450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1588695948902938, guid: 8f5d73e9a9c900e47b136946d65abe18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1290148448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1290148451 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82587272855983544, guid: 8f5d73e9a9c900e47b136946d65abe18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1290148448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290148452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290148449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d1234d817e53f42b2ed7be59d8a125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMainAudioSource: {fileID: 1290148451}
+  sfxAudioSourcePrefab: {fileID: 1290148450}
+  sfxSourcesParent: {fileID: 1290148449}
+  defaultNumSfxSources: 0
+  maxNumSfxSources: 10
 --- !u!1 &1812175371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1317274747385434, guid: e71fbc20afe0faf458abc489b0508afc,
