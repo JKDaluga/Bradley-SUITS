@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -840,6 +840,41 @@ MonoBehaviour:
   sfxSourcesParent: {fileID: 1290148449}
   defaultNumSfxSources: 0
   maxNumSfxSources: 10
+--- !u!114 &1290148453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290148449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2921802867528428fede3179a30530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vitalsWindow: {fileID: 0}
+  proceduresSFX: {fileID: 0}
+  onboardingSFX: {fileID: 0}
+  instructionsSFX: {fileID: 0}
+  completionStepSFX: {fileID: 8300000, guid: 5b8323475f446409bb0f680e70b11026, type: 3}
+  TadaSFX: {fileID: 8300000, guid: 16e259023b1c1463dad7bea71b78ea53, type: 3}
+  AlertSFX: {fileID: 8300000, guid: ae5eeab1df2644ebda14476542c55bc0, type: 3}
+  openMenuSFX: {fileID: 8300000, guid: 622c5b012a29e4fdc9c0a31565b08c48, type: 3}
+  closeMenuSFX: {fileID: 8300000, guid: 65bfd0c8175de488fb2adf2164424239, type: 3}
+--- !u!114 &1290148454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290148449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca14e6eb1c2a424799b8f5be6a86b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  voice: 0
 --- !u!1 &1812175371 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1317274747385434, guid: e71fbc20afe0faf458abc489b0508afc,
