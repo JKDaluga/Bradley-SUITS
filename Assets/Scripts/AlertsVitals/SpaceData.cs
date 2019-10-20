@@ -4,10 +4,6 @@ using System.Collections;
 [System.Serializable]
 public class SpaceData
 {
-    public string instruction;
-    public string tip;
-    public string image;
-
     public float p_suit;
     public string t_battery;
     public string t_oxygen;
@@ -23,6 +19,13 @@ public class SpaceData
     public float p_sop;
     public float rate_sop;
     public int heart_bpm;
+}
+
+public class StepData
+{
+    public string instruction;
+    public string tip;
+    public string image;
 }
 
 [System.Serializable]

@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class VitalsText : MonoBehaviour {
+public class VitalsText : MonoBehaviour
+{
     private const int NUM_VITALS = 16;
     public VitalsSlot[] vitalsSlots = new VitalsSlot[NUM_VITALS];
-  
+
     public string tempText;
     public string BatteryLife;
     public string BatteryCapacity;
@@ -25,113 +26,102 @@ public class VitalsText : MonoBehaviour {
     public string SUBPressure;
     public string SUBTemp;
     public string BPM;
-    
+
+
+    public float GaugeDataFormatter(float dataGauge, float median, float offset, float div1, float div2, bool capped)
+    {
+        float temp = dataGauge;
+        temp -= median;
+        temp /= (offset / 0.7f);
+        float tfa = temp / div1 + div2;
+        if (capped && tfa > 1f)
+            tfa = 1f;
+        if (capped && tfa < 0f)
+            tfa = 0f;
+        return tfa;
+    }
+
+    public float GaugeDataFormatter(float dataGauge, float offset, bool capped)
+    {
+        float tfa = dataGauge;
+        tfa /= offset;
+        if (capped && tfa > 1f)
+            tfa = 1f;
+        if (capped && tfa < 0f)
+            tfa = 0f;
+        return tfa;
+    }
+
+    public float PieDataFormatter(string[] dataPie)
+    {
+        float seconds = float.Parse(dataPie[0]) * 3600 + float.Parse(dataPie[1]) * 60 + float.Parse(dataPie[2]);
+        float tfa = seconds / 36000;
+        if (tfa > 1) tfa = 1;
+        else if (tfa < 0) tfa = 0;
+        return tfa;
+    }
 
     public void UpdateText()
     {
-        //Debug.Log(vitalsSlots.Length + "vialsslsls");
         tempText = "" + DataController.data.data[0].t_sub;
-        //EVA.text = "" + DataController.data.data[0].extraVehicularActivityTime;
         EVA = "";
+        float tempFillAmount;
 
-        //Example Pie Meter
-        string[] timeArray = DataController.data.data[0].t_battery.Split(':');
-        float seconds = float.Parse(timeArray[0]) * 3600 + float.Parse(timeArray[1]) * 60 + float.Parse(timeArray[2]);
-        float tempFillAmount = seconds / 36000;
-        if (tempFillAmount > 1) tempFillAmount = 1;
-        else if(tempFillAmount < 0) tempFillAmount = 0;
-        int tempOrder = 11;
-        AddToList("Battery", "Time Remaining", "" + DataController.data.data[0].t_battery, tempFillAmount, tempOrder, true);
+        // PIES
 
-        //Example Gauge Meter
-        float batcap = DataController.data.data[0].cap_battery;
-        tempFillAmount = DataController.data.data[0].cap_battery / 30f;
-        if (tempFillAmount > 1) tempFillAmount = 1;
-        else if (tempFillAmount < 0) tempFillAmount = 0;
-        tempOrder = 12;
-        AddToList("Battery", "Capacity", DataController.data.data[0].cap_battery.ToString() + " amp-hr", tempFillAmount, tempOrder, true);
-
-        float o2p = DataController.data.data[0].p_o2;
-        o2p -= 850;
-        o2p /= (100/0.7f);
-        tempOrder = 2;
-        tempFillAmount = o2p / 2 + 0.5f;
-        if (tempFillAmount > .9) tempFillAmount = .9f;
-        else if (tempFillAmount < .1f) tempFillAmount = .1f;
-        AddToList("Oxygen", "Current Pressure", DataController.data.data[0].p_o2.ToString() + " psia", tempFillAmount, tempOrder, false);
-
-        float o2r = DataController.data.data[0].rate_o2;
-        o2r -= 0.75f;
-        o2r /= 0.25f / 0.7f;
-        tempOrder = 1;
-        tempFillAmount = o2r / 2 + 0.5f;
-        AddToList("Oxygen", "Current Rate", DataController.data.data[0].rate_o2.ToString() + " psi/min", tempFillAmount, tempOrder, false);
-
-        string[] timeArray3 = DataController.data.data[0].t_oxygen.Split(':');
-        seconds = float.Parse(timeArray3[0]) * 3600 + float.Parse(timeArray3[1]) * 60 + float.Parse(timeArray3[2]);
-        tempFillAmount = seconds /*float.Parse(DataController.data.data[0].t_water)*/ / 36000f;
-        if (tempFillAmount > 1) tempFillAmount = 1;
-        else if (tempFillAmount < 0) tempFillAmount = 0;
-        tempOrder = 0;
+        int tempOrder = 0;
+        tempFillAmount = PieDataFormatter(DataController.data.data[0].t_oxygen.Split(':'));
         AddToList("Oxygen", "Time Remaining", DataController.data.data[0].t_oxygen, tempFillAmount, tempOrder, true);
 
-        string[] timeArray2 = DataController.data.data[0].t_water.Split(':');
-        seconds = float.Parse(timeArray2[0]) * 3600f + float.Parse(timeArray2[1]) * 60f + float.Parse(timeArray2 [2]);
-        tempFillAmount = seconds / 36000f;
-        if (tempFillAmount > 1) tempFillAmount = 1;
-        else if (tempFillAmount < 0) tempFillAmount = 0;
         tempOrder = 3;
+        tempFillAmount = PieDataFormatter(DataController.data.data[0].t_water.Split(':'));
         AddToList("H2O", "Time Remaining", DataController.data.data[0].t_water, tempFillAmount, tempOrder, true);
 
-        float h20pg = DataController.data.data[0].p_h2o_g;
-        h20pg -= 15;
-        h20pg /= 1 / 0.7f;
-        tempOrder = 5;
-        tempFillAmount = h20pg / 2 + 0.5f;
-        AddToList("H2O", "Gas Pressure", DataController.data.data[0].p_h2o_g.ToString() + " psia", tempFillAmount, tempOrder, false);
+        tempOrder = 11;
+        tempFillAmount = PieDataFormatter(DataController.data.data[0].t_battery.Split(':'));
+        AddToList("Battery", "Time Remaining", "" + DataController.data.data[0].t_battery, tempFillAmount, tempOrder, true);
 
-        float h20pl = DataController.data.data[0].p_h2o_l;
-        h20pl -= 15;
-        h20pl /= 1 / 0.7f;
+        // GAUGES
+
+        tempOrder = 1;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].rate_o2, .75f, .25f, 2, 0.5f, false);
+        AddToList("Oxygen", "Current Rate", DataController.data.data[0].rate_o2.ToString() + " psi/min", tempFillAmount, tempOrder, false);
+
+        tempOrder = 2;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_o2, 850, 100, 2, .05f, true);
+        AddToList("Oxygen", "Current Pressure", DataController.data.data[0].p_o2.ToString() + " psia", tempFillAmount, tempOrder, false);
+
         tempOrder = 4;
-        tempFillAmount = h20pl / 2 + 0.5f;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_h2o_l, 15, 1, 2, 0.5f, false);
         AddToList("H2O", "Liquid Pressure", DataController.data.data[0].p_h2o_l.ToString() + " psia", tempFillAmount, tempOrder, false);
 
-        float fanSpeed = DataController.data.data[0].v_fan;
-        fanSpeed -=25000;
-        fanSpeed /= 15000 / 0.7f;
-        tempOrder = 10;
-        tempFillAmount = fanSpeed / 10000;
-        AddToList("Fan", "Current RPM", DataController.data.data[0].v_fan.ToString() + " RPM", tempFillAmount, tempOrder, false);
+        tempOrder = 5;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_h2o_g, 15, 1, 2, 0.5f, false);
+        AddToList("H2O", "Gas Pressure", DataController.data.data[0].p_h2o_g.ToString() + " psia", tempFillAmount, tempOrder, false);
 
-        float subp = DataController.data.data[0].p_sub;
-        subp -= 3;
-        subp /= 1 / 0.7f;
         tempOrder = 6;
-        tempFillAmount = subp / 2 + 2f;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_sub, 3, 1, 2, 2, false);
         AddToList("Sub", "SubPressure", DataController.data.data[0].p_sub.ToString() + " psia", tempFillAmount, tempOrder, false);
 
-        float sopp = DataController.data.data[0].p_sop;
-        sopp -= 850;
-        sopp /= 100 / 0.7f;
-        tempOrder = 9;
-        tempFillAmount = sopp / 2 + 0.5f;
-        AddToList("SOP", "Current Pressure", DataController.data.data[0].p_sop.ToString() + " psia", tempFillAmount, tempOrder, false);
-
-        float sopr = DataController.data.data[0].rate_sop;
-        sopr -= .75f;
-        sopr /= .25f / 0.7f;
-        tempOrder = 8;
-        tempFillAmount = sopr / 2 + 0.5f;
-        AddToList("SOP", "Rate", DataController.data.data[0].rate_sop.ToString() + "psi/min", tempFillAmount, tempOrder, false);
-
-        float suitp = DataController.data.data[0].p_suit;
-        suitp -= 3;
-        suitp /= 1 / 0.7f;
         tempOrder = 7;
-        tempFillAmount = suitp / 2 + 0.5f;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_suit, 3, 1, 2, 0.5f, false);
         AddToList("Suit", "Current Pressure", DataController.data.data[0].p_suit.ToString() + " psid", tempFillAmount, tempOrder, false);
 
+        tempOrder = 8;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].rate_sop, .75f, .25f, 2, 0.5f, false);
+        AddToList("SOP", "Rate", DataController.data.data[0].rate_sop.ToString() + "psi/min", tempFillAmount, tempOrder, false);
+
+        tempOrder = 9;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].p_sop, 850, 100, 2, 0.5f, false);
+        AddToList("SOP", "Current Pressure", DataController.data.data[0].p_sop.ToString() + " psia", tempFillAmount, tempOrder, false);
+
+        tempOrder = 10;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].v_fan, 25000, 15000, 10000, 0, false);
+        AddToList("Fan", "Current RPM", DataController.data.data[0].v_fan.ToString() + " RPM", tempFillAmount, tempOrder, false);
+
+        tempOrder = 12;
+        tempFillAmount = GaugeDataFormatter(DataController.data.data[0].cap_battery, 30f, true);
+        AddToList("Battery", "Capacity", DataController.data.data[0].cap_battery.ToString() + " amp-hr", tempFillAmount, tempOrder, true);
     }
 
     void AddToList(string title, string subTitle, string value, float fillAmount, int i, bool isPie)
@@ -139,7 +129,6 @@ public class VitalsText : MonoBehaviour {
         //fill the vitalslot
         vitalsSlots[i].fillamount = fillAmount;
         vitalsSlots[i].order = i;
-        //vitalsSlots[i].title.text = title;
         vitalsSlots[i].subTitle.text = subTitle;
         vitalsSlots[i].value.text = value;
         vitalsSlots[i].isPie = isPie;

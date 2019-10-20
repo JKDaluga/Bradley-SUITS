@@ -7,7 +7,7 @@ public class Alert : MonoBehaviour {
     public GameObject panel;
     public Text alertText;
 
-    private void Start() //JASON.reinstate("Francais");
+    private void Start()
     {
         panel = this.gameObject;
         alertText = this.GetComponentInChildren<Text>();
