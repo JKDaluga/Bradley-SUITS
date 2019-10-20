@@ -61,7 +61,7 @@ public class StepIterator : MonoBehaviour {
         if (count == 0) prevStep.SetActive(false);
         else prevStep.SetActive(true);
 
-        if (DataController.stepData.stepData[i].tip.Equals(""))
+        if (DataController.stepDataCollection.stepData[i].tip.Equals(""))
             tpanel.SetActive(false);
         else
             tpanel.SetActive(true);
@@ -100,7 +100,7 @@ public class StepIterator : MonoBehaviour {
 
     public void repeat()
     {
-        var msg = string.Format(DataController.stepData.stepData[count].instruction + " " + DataController.stepData.stepData[count].tip, textToSpeech.Voice.ToString());
+        var msg = string.Format(DataController.stepDataCollection.stepData[count].instruction + " " + DataController.stepDataCollection.stepData[count].tip, textToSpeech.Voice.ToString());
         textToSpeech.StartSpeaking(msg);
     }
 }
