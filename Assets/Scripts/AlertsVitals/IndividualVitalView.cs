@@ -5,12 +5,15 @@ public class IndividualVitalView : MonoBehaviour
 {
     //How long in seconds the blocks should show before dissapearing
     private const float PIN_TIME = 10f;
+    
     //The currently-showing vitals block
     //A block is one UI container for a vital. This includes the heading, and all
     //subpanels with that show the data
     public GameObject CurrentBlock = null;
+    
     //Used for holding pinned blocks
     public List<GameObject> PinnedBlocks;
+    
     //Countdown timer for pinning the vital block
     public float PinTime = PIN_TIME;
     public GameObject helpText;
@@ -53,10 +56,13 @@ public class IndividualVitalView : MonoBehaviour
         
         //Plays the sound effect for viewing a vital
         AudioLibrary.OpenMenuSFX();
+        
         //Removes the current block, if any
         Destroy(CurrentBlock);
+        
         //Sets the help text for the individual vital block to be shown
         helpText.SetActive(true);
+        
         //Spawns the panel of the given type
         CurrentBlock = SpawnPanel(type);
 
@@ -75,6 +81,7 @@ public class IndividualVitalView : MonoBehaviour
                 SetPie(true, type, 1);
                 SetFillAmount(tempFillAmount, type, 1);
                 SetSubtitle("Time Remaining", type, 1);
+    
                 //Sets the actual data on the subpanel
                 CurrentBlock.transform.Find(type.ToLower() + "_VitalsDataBlock1").GetComponent<VitalsSlot>().value.text = DataController.data.data[0].t_battery;
 
@@ -278,19 +285,26 @@ public class IndividualVitalView : MonoBehaviour
     {
         GameObject toInstantiate = null;
         GameObject toReturn = null;
+
         //Loads the prefab from file
         toInstantiate = Resources.Load<GameObject>("Prefabs/Vitals/" + type);
+        
         //Instantiates the block
         toReturn = GameObject.Instantiate(toInstantiate);
+        
         //Sets the block's position to the upper right corner
         toReturn.transform.position = ((Camera.main.transform.forward * 10)
                                   + (2 * Camera.main.transform.right) + (2 * Camera.main.transform.up));
         toReturn.transform.rotation = new Quaternion(0, 0, 0, 0);
+        
         //Sets the block's parent so it is always n front of the user
         toReturn.transform.parent = GameObject.Find("VitalsCanvas").transform;
+        
         //Scales the panel down to not be massive
         toReturn.transform.localScale *= 0.005f;
-        toReturn.tag = "IndividualPanel"; //Tags the block so it can be removed
+
+        //Tags the block so it can be removed
+        toReturn.tag = "IndividualPanel";
         
         return toReturn;
     }
@@ -300,11 +314,13 @@ public class IndividualVitalView : MonoBehaviour
     /// </summary>
     private void tickCoundown()
     {
-        if (CurrentBlock != null) //Makes sure a block has been spawned
+        //Makes sure a block has been spawned
+        if (CurrentBlock != null)
         {
             PinTime = PinCountdown(PinTime);
 
-            if (PinTime <= 0) //If the time is 0, destory the current block
+            //If the time is 0, destory the current block
+            if (PinTime <= 0)
             {
                 helpText.SetActive(false);
                 Destroy(CurrentBlock);
@@ -317,12 +333,17 @@ public class IndividualVitalView : MonoBehaviour
     /// </summary>
     private void PinIndividualPanel()
     {
-        if (CurrentBlock != null) //Makes sure there is a panel spawned to pin
+        //Makes sure there is a panel spawned to pin
+        if (CurrentBlock != null)
         {
             helpText.SetActive(false);
-            PinnedBlocks.Add(CurrentBlock); //Adds the panel to the pinned list
+
+            //Adds the panel to the pinned list
+            PinnedBlocks.Add(CurrentBlock);
             CurrentBlock.transform.SetParent(GameObject.Find("Menu").transform);
-            CurrentBlock = null; //Resets the current panel
+
+            //Resets the current panel
+            CurrentBlock = null;
         }
     }
 
@@ -344,7 +365,8 @@ public class IndividualVitalView : MonoBehaviour
     /// </summary>
     private void RemoveFocusedPanel()
     {
-        RaycastHit hit; //Sets up a RaycastHit to be used in the subsequent raycast
+        //Sets up a RaycastHit to be used in the subsequent raycast
+        RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 30.0f,
             Physics.DefaultRaycastLayers))
         {
