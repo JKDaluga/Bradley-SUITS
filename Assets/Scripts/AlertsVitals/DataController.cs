@@ -13,18 +13,25 @@ public class DataCollection
     public HelpData[] helpData;
 }
 
+public class StepDataCollection
+{
+    public StepData[] stepData;
+}
+
+
 public class DataController : MonoBehaviour
 {
     // Data
     public static DataCollection data;
+    public static StepDataCollection stepDataCollection = new StepDataCollection();
     public static ProcedureCollection pdata;
 
     public StepIterator stepIterator;
 
     //URLs
     private static string url = "http://api.buearth.space/procedure/";
-    private static string vitalsUrl = " https://soyuz-program.herokuapp.com/api/suit/recent";
-    private static string switchUrl = " https://soyuz-program.herokuapp.com/api/suitswitch/recent";
+    private static string vitalsUrl = "https://soyuz-program.herokuapp.com/api/suit/recent";
+    private static string switchUrl = "https://soyuz-program.herokuapp.com/api/suitswitch/recent";
     private static string proceduresUrl = "http://api.buearth.space/procedures";
 
     // New Data 
@@ -58,7 +65,7 @@ public class DataController : MonoBehaviour
         using (WWW www = new WWW(url + i))
         {
             yield return www;
-            DataController.data = JsonUtility.FromJson<DataCollection>("{\"data\":" + www.text + "}");
+            DataController.stepDataCollection = JsonUtility.FromJson<StepDataCollection>("{\"stepData\":" + www.text + "}");
             stepIterator.gameObject.SetActive(true);
             stepIterator.reset();
         }

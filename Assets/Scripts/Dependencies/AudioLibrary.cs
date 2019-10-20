@@ -21,11 +21,6 @@ public class AudioLibrary : Singleton<AudioLibrary>
 	public AudioClip closeMenuSFX;
 
 
-
-
-
-
-
 	public static void VitalsWindowSFX()
 	{
 		//AudioManager.PlaySound();
@@ -62,8 +57,4 @@ public class AudioLibrary : Singleton<AudioLibrary>
 	{
 		AudioManager.PlaySound (inst.AlertSFX);
 	}
-
-
-
-
 }
