@@ -12,6 +12,7 @@ TagManager:
   - WhatIsPanel
   - WhatIsPicture
   - Screens
+  - AudioManager
   layers:
   - Default
   - TransparentFX
@@ -44,7 +45,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Spatial Awareness
   m_SortingLayers:
   - name: Default
     uniqueID: 0
