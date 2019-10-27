@@ -21,6 +21,7 @@ public class SpaceData
     public int heart_bpm;
 }
 
+[System.Serializable]
 public class StepData
 {
     public string instruction;
