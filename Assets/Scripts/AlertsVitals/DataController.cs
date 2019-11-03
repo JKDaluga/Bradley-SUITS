@@ -13,6 +13,7 @@ public class DataCollection
     public HelpData[] helpData;
 }
 
+[System.Serializable]
 public class StepDataCollection
 {
     public StepData[] stepData;
@@ -23,7 +24,7 @@ public class DataController : MonoBehaviour
 {
     // Data
     public static DataCollection data;
-    public static StepDataCollection stepDataCollection = new StepDataCollection();
+    public static StepDataCollection stepDataCollection;
     public static ProcedureCollection pdata;
 
     public StepIterator stepIterator;
