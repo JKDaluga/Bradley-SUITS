@@ -43,11 +43,11 @@ public class StepIterator : MonoBehaviour {
         }
         
         tip.text = DataController.stepDataCollection.stepData[i].tip;
-        stepcounter.text = i+1 + "/" + DataController.data.data.Length;
+        stepcounter.text = i+1 + "/" + DataController.stepDataCollection.stepData.Length;
         var msg = string.Format(DataController.stepDataCollection.stepData[i].instruction + " " + DataController.stepDataCollection.stepData[i].tip, textToSpeech.Voice.ToString());
         textToSpeech.StartSpeaking(msg);
 
-        if (count + 1 == DataController.data.data.Length)
+        if (count + 1 == DataController.stepDataCollection.stepData.Length)
         {
             nextStep.SetActive(false);
             SayExitText.SetActive(true);
@@ -69,11 +69,11 @@ public class StepIterator : MonoBehaviour {
 
     public void next()
     {
-        if (count + 1 < DataController.data.data.Length)
+        if (count + 1 < DataController.stepDataCollection.stepData.Length)
         {
 			//stepInstructionsAnimations.SlideOutInstructions ();
             loadStep(++count);
-			if (count + 1 == DataController.data.data.Length) {
+			if (count + 1 == DataController.stepDataCollection.stepData.Length) {
 				AudioLibrary.Tada ();
 			} else {
 				AudioLibrary.CompletionStepSFX();
