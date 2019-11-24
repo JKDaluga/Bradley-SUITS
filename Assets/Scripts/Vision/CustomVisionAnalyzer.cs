@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -64,13 +65,13 @@ public class CustomVisionAnalyzer : MonoBehaviour
             string jsonResponse = unityWebRequest.downloadHandler.text;
             
             // Creaete a texture. Texture size does not mattre since LoadImage will replace with the incoming image size
-            //Texture2D tex = new Textture2D(1, 1);
-            //tex.LoadImage(imageBytes);
-            //SceneOrganiser.Istance.quadRenderer.material.SetTexure("_MainTex", tex);
+            Texture2D tex = new Texture2D(1, 1);
+            tex.LoadImage(imageBytes);
+            SceneOrganiser.Instance.quadRenderer.material.SetTexture("_MainTex", tex);
             
             // The response will be in JSON forma,therefor it needs to be deserialized
-            //AnalysisRootObject analysisRootObject = new AnalysisRootObject();
-            //analysisRootObject = JsonConvert.DeserializeObject<AnalysisRootObject>(jsonResponse);
+            AnalysisRootObject analysisRootObject = new AnalysisRootObject();
+            analysisRootObject = JsonConvert.DeserializeObject<AnalysisRootObject>(jsonResponse);
             
             //Sceneorganizer.Instance.FinaliseLabel(analysisRootObject);
         }

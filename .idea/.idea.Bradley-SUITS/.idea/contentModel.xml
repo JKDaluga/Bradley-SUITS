@@ -1302,6 +1302,10 @@
           <e p="Vision" t="Include">
             <e p="CustomVisionAnalyzer.cs" t="Include" />
             <e p="CustomVisionObject.cs" t="Include" />
+            <e p="GazeCursor.cs" t="Include" />
+            <e p="ImageCapture.cs" t="Include" />
+            <e p="SceneOrganiser.cs" t="Include" />
+            <e p="SpatialMapping.cs" t="Include" />
           </e>
           <e p="VoiceCommands" t="Include">
             <e p="CloseCommand.cs" t="Include" />

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -6,7 +7,7 @@ using UnityEngine.Networking;
 // The objects in this script represent the deserialized version of the objects used bby this application
 
 /// <summary>
-/// Web request object for image ddata
+/// Web request object for image data
 /// </summary>
 class MultipartObject : IMultipartFormSection
 {
@@ -43,7 +44,85 @@ public class TagOfProject
 /// </summary>
 public class Tag_RootObject
 {
-    
+    public List<Tag> Tags { get; set; }
+}
+
+public class Tag
+{
+    public string ImageId { get; set; }
+    public string TagId { get; set; }
+}
+
+/// <summary>
+/// JSON of images submited. Contains objects that host detailed
+/// information about one or more images
+/// </summary>
+public class ImageRootObject
+{
+    public bool IsBatchSuccessful { get; set; }
+    public List<SubmittedImage> Images { get; set; }
+}
+
+public class SubmittedImage
+{
+    public string SourceUrl { get; set; }
+    public string Status { get; set; }
+    public ImageObject Image { get; set; }
+}
+
+public class ImageObject
+{
+    public string Id { get; set; }
+    public DateTime Created { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public string ImageUri { get; set; }
+    public string ThumbnailUri { get; set; }
+}
+
+/// <summary>
+/// JSON of Service Iteration
+/// </summary>
+public class Iteration
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public bool IsDefault { get; set; }
+    public string Status { get; set; }
+    public string Creatd { get; set; }
+    public string LastModified { get; set; }
+    public string TrainedAt { get; set; }
+    public string ProjectId { get; set; }
+    public bool Exportable { get; set; }
+    public string DomainId { get; set; }
+}
+
+/// <summary>
+/// Predictions recieved by the Service after submitting
+/// </summary>
+public class AnalysisRootObject
+{
+    public string id { get; set; }
+    public string project { get; set; }
+    public string iteration { get; set; }
+    public DateTime created { get; set; }
+    public List<Prediction> predictions { get; set; }
+}
+
+public class BoundingBox
+{
+    public double left { get; set; }
+    public double top { get; set; }
+    public double width { get; set; }
+    public double height { get; set; }
+}
+
+public class Prediction
+{
+    public double probability { get; set; }
+    public string tagId { get; set; }
+    public string tagName { get; set; }
+    public BoundingBox boundingBox { get; set; }
 }
 public class CustomVisionObject : MonoBehaviour
 {
