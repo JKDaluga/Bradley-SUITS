@@ -13,8 +13,9 @@ public class ContinueCommand : MonoBehaviour {
         onboardScreen = GameObject.FindWithTag("Manager").GetComponent<AnimationManager>();
     }
 
-    void Continue()
+    public void Continue()
     {
+        print("gotcha boi");
         onboardScreen.PlayAnimationFadeOut(onboardingScreen);
         //stepIterator.loadStep(0);
         //stepIterator.gameObject.SetActive(true);
